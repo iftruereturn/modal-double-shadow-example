@@ -5,11 +5,11 @@ let key = 0;
 
 class App extends React.Component {
     state = {
-        modals: null,
+        modal: null,
     };
 
     modals = [
-        ({ number, width }) => <Modal width={width}>
+        ({ number }) => <Modal>
             <Modal.Header>
                 Modal One - {number}
             </Modal.Header>
@@ -17,7 +17,7 @@ class App extends React.Component {
                 <button onClick={() => this.addOrReplaceModal()}>replace modal</button>
             </Modal.Body>
         </Modal>,
-        ({ number, width }) => <Modal width={width}>
+        ({ number }) => <Modal>
             <Modal.Header>
                 Modal Two - {number}
             </Modal.Header>
@@ -25,7 +25,7 @@ class App extends React.Component {
                 <button onClick={() => this.addOrReplaceModal()}>replace modal</button>
             </Modal.Body>
         </Modal>,
-        ({ number, width }) => <Modal width={width}>
+        ({ number }) => <Modal>
             <Modal.Header>
                 Modal Three - {number}
             </Modal.Header>
@@ -39,44 +39,22 @@ class App extends React.Component {
         let NewModalComponent = this.modals[key++ % 3];
 
         this.setState(({
-            modals: [
-                <NewModalComponent number={key} key={'a' + key} width={500}/>,
-                <NewModalComponent number={key} key={'b' + key} width={400}/>,
-            ]
+            modal: <NewModalComponent number={key}/>
         }));
     };
 
     render() {
         return (
             <div className="App">
-                "react": "0.14.7",
-                "react-dom": "0.14.7"
-
-                <Modal width={800}>
+                <Modal width={400}>
                     <Modal.Header>
-                        Add Modal (REACT 0.14)
+                        Add Modal
                     </Modal.Header>
                     <Modal.Body>
                         <button onClick={() => this.addOrReplaceModal()}>add modal</button>
                     </Modal.Body>
                 </Modal>
-                <Modal width={700}>
-                    <Modal.Header>
-                        Add Modal (REACT 0.14)
-                    </Modal.Header>
-                    <Modal.Body>
-                        <button onClick={() => this.addOrReplaceModal()}>add modal</button>
-                    </Modal.Body>
-                </Modal>
-                <Modal width={600}>
-                    <Modal.Header>
-                        Add Modal (REACT 0.14)
-                    </Modal.Header>
-                    <Modal.Body>
-                        <button onClick={() => this.addOrReplaceModal()}>add modal</button>
-                    </Modal.Body>
-                </Modal>
-                {this.state.modals}
+                {this.state.modal}
             </div>
         );
     }
